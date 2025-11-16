@@ -28,3 +28,26 @@ async function bootstrap() {
 }
 
 bootstrap();
+
+// Export the NestJS app for Vercel serverless
+export default async (req, res) => {
+  const app = await NestFactory.create(AppModule);
+  
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN || '*',
+    credentials: true,
+  });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
+
+  app.setGlobalPrefix('api');
+
+  await app.init();
+  const server = app.getHttpAdapter().getInstance();
+  return server(req, res);
+};
