@@ -1,10 +1,9 @@
 import axios from 'axios';
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
+import { env } from '$env/dynamic/public';
 
-const API_URL = import.meta.env.PUBLIC_API_URL;
-
-console.log('API URL:', API_URL);
+const API_URL = env.PUBLIC_API_URL;
 
 export const api = axios.create({
 	baseURL: API_URL,
