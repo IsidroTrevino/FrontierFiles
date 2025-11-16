@@ -4,6 +4,8 @@ import { goto } from '$app/navigation';
 
 const API_URL = import.meta.env.PUBLIC_API_URL;
 
+console.log('API URL:', API_URL);
+
 export const api = axios.create({
 	baseURL: API_URL,
 	headers: {
